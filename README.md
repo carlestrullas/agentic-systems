@@ -1,47 +1,47 @@
 # Agentic Systems
 
-Repositorio dedicado a la exploración, diseño e implementación de **sistemas agénticos**: aplicaciones en las que uno o varios agentes basados en modelos de lenguaje (LLM) razonan, planifican y utilizan herramientas para completar tareas de forma autónoma.
+A repository dedicated to exploring, designing, and building **agentic systems**: applications in which one or more agents powered by large language models (LLMs) reason, plan, and use tools to complete tasks autonomously.
 
-## Objetivos
+## Goals
 
-- Experimentar con distintos patrones de arquitectura agéntica.
-- Construir ejemplos prácticos y reutilizables.
-- Documentar aprendizajes, buenas prácticas y limitaciones encontradas.
+- Experiment with different agentic architecture patterns.
+- Build practical, reusable examples.
+- Document lessons learned, best practices, and limitations encountered.
 
-## Conceptos clave
+## Key concepts
 
-| Concepto | Descripción |
+| Concept | Description |
 | --- | --- |
-| **Agente** | Un LLM que decide qué acciones tomar en un bucle hasta alcanzar un objetivo. |
-| **Herramientas (tools)** | Funciones externas que el agente puede invocar (búsqueda, APIs, código, ficheros…). |
-| **Memoria** | Mecanismos para conservar contexto entre pasos o sesiones. |
-| **Planificación** | Descomposición de una tarea compleja en subtareas manejables. |
-| **Multiagente** | Varios agentes especializados que colaboran o se coordinan entre sí. |
+| **Agent** | An LLM that decides which actions to take in a loop until it reaches a goal. |
+| **Tools** | External functions the agent can call (search, APIs, code execution, files…). |
+| **Memory** | Mechanisms for retaining context across steps or sessions. |
+| **Planning** | Breaking a complex task down into manageable subtasks. |
+| **Multi-agent** | Several specialized agents that collaborate or coordinate with each other. |
 
-## Estructura del repositorio
+## Repository structure
 
-> El repositorio está en sus primeras fases. Esta sección se irá actualizando a medida que se añada contenido.
+> This repository is at an early stage. This section will be updated as content is added.
 
 ```
 agentic-systems/
 └── README.md
 ```
 
-## Primeros pasos
+## Getting started
 
-1. Clona el repositorio:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/carlestrullas/agentic-systems.git
    cd agentic-systems
    ```
 
-2. Sigue las instrucciones específicas de cada proyecto o ejemplo a medida que se vayan incorporando.
+2. Follow the specific instructions for each project or example as they are added.
 
-## Contribuir
+## Contributing
 
-Las sugerencias y mejoras son bienvenidas. Abre un *issue* o una *pull request* describiendo el cambio propuesto.
+Suggestions and improvements are welcome. Open an *issue* or a *pull request* describing the proposed change.
 
-## Autor
+## Author
 
 Carles Trullas — [@carlestrullas](https://github.com/carlestrullas)

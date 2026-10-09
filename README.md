@@ -1,12 +1,16 @@
 # Agentic Systems
 
-A repository dedicated to exploring, designing, and building **agentic systems**: applications in which one or more agents powered by large language models (LLMs) reason, plan, and use tools to complete tasks autonomously.
+Hands-on projects on building **agentic systems**: applications in which one or more agents powered by large language models (LLMs) reason, plan and use tools to complete tasks autonomously.
 
-## Goals
+The repository is organised **by framework**. Each folder contains self-contained examples, from a single agent with one tool to multi-agent workflows, with the code and the ideas behind it, so the same problems can be compared across different approaches.
 
-- Experiment with different agentic architecture patterns.
-- Build practical, reusable examples.
-- Document lessons learned, best practices, and limitations encountered.
+## Frameworks and examples
+
+| Framework | Example | Description |
+|---|---|---|
+| [CrewAI](crew_ai/) | [`researcher_agent`](crew_ai/researcher_agent/) | A research analyst agent that searches the web and writes a structured, sourced report on any topic. |
+
+More frameworks (such as LangGraph, the OpenAI Agents SDK, the Claude Agent SDK or agents built from scratch) and more complex examples will be added over time.
 
 ## Key concepts
 
@@ -16,15 +20,20 @@ A repository dedicated to exploring, designing, and building **agentic systems**
 | **Tools** | External functions the agent can call (search, APIs, code execution, files…). |
 | **Memory** | Mechanisms for retaining context across steps or sessions. |
 | **Planning** | Breaking a complex task down into manageable subtasks. |
-| **Multi-agent** | Several specialized agents that collaborate or coordinate with each other. |
+| **Multi-agent** | Several specialised agents that collaborate or coordinate with each other. |
 
 ## Repository structure
 
-> This repository is at an early stage. This section will be updated as content is added.
-
 ```
 agentic-systems/
-└── README.md
+├── README.md
+└── crew_ai/
+    ├── README.md
+    └── researcher_agent/
+        ├── researcher.py
+        ├── requirements.txt
+        ├── .env.example
+        └── README.md
 ```
 
 ## Getting started
@@ -36,11 +45,9 @@ agentic-systems/
    cd agentic-systems
    ```
 
-2. Follow the specific instructions for each project or example as they are added.
+2. Go to the example you want to run and follow its README. Each example has its own `requirements.txt` and a `.env.example` file listing the API keys it needs.
 
-## Contributing
-
-Suggestions and improvements are welcome. Open an *issue* or a *pull request* describing the proposed change.
+> **API keys:** never commit real keys. Copy `.env.example` to `.env` (which is git-ignored) and replace the `REPLACE_ME` placeholders there.
 
 ## Author
 

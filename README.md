@@ -72,4 +72,4 @@ agentic-systems/
 
 ## Author
 
-Carles Trullas — [@carlestrullas](https://github.com/carlestrullas)
+Carles Trullàs — [@carlestrullas](https://github.com/carlestrullas)

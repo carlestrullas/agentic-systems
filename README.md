@@ -8,7 +8,7 @@ The repository is organised **by framework**. Each folder contains self-containe
 
 | Framework | Example | Description |
 |---|---|---|
-| [CrewAI](crew_ai/) | [`researcher_agent`](crew_ai/researcher_agent/) | A research analyst agent that searches the web and writes a structured, sourced report on any topic. |
+| [CrewAI](crew_ai/) | [`researcher_agent`](crew_ai/researcher_agent/) | A research analyst agent that searches the web and writes a structured, sourced report on any topic. Works with Ollama or an API key. |
 | [CrewAI](crew_ai/) | [`technical_writer_agent`](crew_ai/technical_writer_agent/) | A technical writer agent that drafts articles, plus a summarizer agent that reads files with a tool. Works with Ollama or an API key. |
 | [CrewAI](crew_ai/) | [`research_crew`](crew_ai/research_crew/) | A three-agent crew (researcher, summarizer, fact-checker) configured with YAML. Works with Ollama or an API key. |
 
@@ -33,6 +33,7 @@ agentic-systems/
     ├── README.md
     ├── researcher_agent/
     │   ├── researcher.py
+    │   ├── llm.py
     │   ├── requirements.txt
     │   ├── .env.example
     │   └── README.md
@@ -65,7 +66,7 @@ agentic-systems/
 
 2. Go to the example you want to run and follow its README. Each example has its own `requirements.txt` and a `.env.example` file listing the API keys it needs.
 
-> **Local or hosted models:** the newer examples run either on a local model served by [Ollama](https://ollama.com) (free, no API key) or on a hosted provider (OpenAI, Anthropic, Gemini, Groq…) with an API key. You switch between them by changing the `MODEL` line in `.env`.
+> **Local or hosted models:** all examples run either on a local model served by [Ollama](https://ollama.com) (free, no API key) or on a hosted provider (OpenAI, Anthropic, Gemini, Groq…) with an API key. You switch between them by changing the `MODEL` line in `.env`.
 
 > **API keys:** never commit real keys. Copy `.env.example` to `.env` (which is git-ignored) and replace the `REPLACE_ME` placeholders there.
 

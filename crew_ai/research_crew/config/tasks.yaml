@@ -1,0 +1,35 @@
+# Task definitions. Each task is assigned to an agent from agents.yaml.
+# {topic} and {today} are filled in from crew.kickoff(inputs={...}).
+
+research_task:
+  agent: researcher
+  description: >
+    Search the web for the latest information about {topic}. Today's date is
+    {today}. Look for recent developments, the main players, concrete numbers
+    and open debates. Use at least three different sources and extract the key
+    insights from each one.
+  expected_output: >
+    Research notes in Markdown: a bullet list of key insights, each one followed
+    by the URL of the source it comes from.
+
+summary_task:
+  agent: summarizer
+  description: >
+    Using only the research notes from the previous task, write a structured
+    summary of {topic}. Group related points, drop duplicates and keep the
+    source link next to each claim.
+  expected_output: >
+    A Markdown summary with the sections: ## Overview (3–4 sentences),
+    ## Key points (5–8 bullets, each with its source) and ## Open questions.
+
+fact_check_task:
+  agent: fact_checker
+  description: >
+    Fact-check the summary of {topic} from the previous task. Search the web to
+    verify each key point, especially numbers, dates and names. Correct any
+    claim that is wrong, remove claims that cannot be verified, and mark
+    uncertain claims as such.
+  expected_output: >
+    The final report in Markdown, starting with a title (# {topic}), followed by
+    the corrected sections of the summary, a ## Fact-check notes section listing
+    what was changed or flagged and why, and a ## Sources section with all links.

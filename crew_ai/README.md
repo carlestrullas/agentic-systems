@@ -8,7 +8,9 @@
 |---|---|---|
 | [`researcher_agent`](researcher_agent/) | 1 | The basic building blocks: an agent with a search tool, a task with a structured expected output, and a crew that saves the result to a file; runs on Ollama or a hosted API. |
 | [`technical_writer_agent`](technical_writer_agent/) | 1 + 1 | A writer agent with no tools and a summarizer agent that reads a file with `FileReadTool`; runs on Ollama or a hosted API. |
-| [`research_crew`](research_crew/) | 3 | A multi-agent pipeline (research → summary → fact-check) with agents and tasks defined in YAML; runs on Ollama or a hosted API. |
+| [`research_crew`](research_crew/) | 3 | A multi-agent pipeline (research → summary → fact-check) defined as a modular `@CrewBase` class with YAML config; runs on Ollama or a hosted API. |
+| [`entity_extractor`](entity_extractor/) | 1 | Structured output: the task returns a validated Pydantic object (`output_pydantic`) with subject-relation-object triplets. |
+| [`currency_converter`](currency_converter/) | 2 | A custom tool (`BaseTool` subclass) for live exchange rates, plus a parser agent that turns a free-text question into the tool's Pydantic input. |
 
 ## Choosing the model: Ollama or API key
 
@@ -32,3 +34,6 @@ Every script also accepts `--model` to override it for one run. Each example's R
 | **Tool** | Any function the agent can call, from the `crewai_tools` package or custom-built. |
 | **Crew** | `Crew(agents, tasks, process)`: runs the tasks, passing each output as context to the next. |
 | **Process** | `sequential` (tasks in order) or `hierarchical` (a manager agent delegates). |
+| **CrewBase** | `@CrewBase` class with `@agent`, `@task` and `@crew` methods that load their settings from YAML. |
+| **Structured output** | `Task(..., output_pydantic=Model)`: the result is a validated Pydantic object (`result.pydantic`). |
+| **Custom tool** | A `BaseTool` subclass with `name`, `description`, `args_schema` (Pydantic) and a `_run` method. |

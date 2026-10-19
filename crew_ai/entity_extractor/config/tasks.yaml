@@ -1,0 +1,13 @@
+# {text} is filled in from crew.kickoff(inputs={"text": ...}).
+# The output schema (KnowledgeGraph) is attached in extractor_crew.py.
+
+extraction_task:
+  agent: extractor
+  description: >
+    Read the following text and extract all the entity-relation-entity
+    triplets it contains. Resolve pronouns to the entity they refer to and do
+    not invent facts that are not in the text.
+
+    Text: {text}
+  expected_output: >
+    The list of triplets found in the text, following the provided schema.

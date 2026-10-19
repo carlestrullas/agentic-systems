@@ -10,7 +10,9 @@ The repository is organised **by framework**. Each folder contains self-containe
 |---|---|---|
 | [CrewAI](crew_ai/) | [`researcher_agent`](crew_ai/researcher_agent/) | A research analyst agent that searches the web and writes a structured, sourced report on any topic. Works with Ollama or an API key. |
 | [CrewAI](crew_ai/) | [`technical_writer_agent`](crew_ai/technical_writer_agent/) | A technical writer agent that drafts articles, plus a summarizer agent that reads files with a tool. Works with Ollama or an API key. |
-| [CrewAI](crew_ai/) | [`research_crew`](crew_ai/research_crew/) | A three-agent crew (researcher, summarizer, fact-checker) configured with YAML. Works with Ollama or an API key. |
+| [CrewAI](crew_ai/) | [`research_crew`](crew_ai/research_crew/) | A three-agent crew (researcher, summarizer, fact-checker) built as a modular class with YAML config. Works with Ollama or an API key. |
+| [CrewAI](crew_ai/) | [`entity_extractor`](crew_ai/entity_extractor/) | Extracts subject-relation-object triplets from text as a validated Pydantic object (structured output). Works with Ollama or an API key. |
+| [CrewAI](crew_ai/) | [`currency_converter`](crew_ai/currency_converter/) | Answers money questions with a custom live exchange-rate tool and a query-parsing agent. Works with Ollama or an API key. |
 
 More frameworks (such as LangGraph, the OpenAI Agents SDK, the Claude Agent SDK or agents built from scratch) and more complex examples will be added over time.
 
@@ -44,12 +46,33 @@ agentic-systems/
     │   ├── requirements.txt
     │   ├── .env.example
     │   └── README.md
-    └── research_crew/
-        ├── crew.py
+    ├── research_crew/
+    │   ├── main.py
+    │   ├── research_crew.py
+    │   ├── llm.py
+    │   ├── config/
+    │   │   ├── agents.yaml
+    │   │   └── tasks.yaml
+    │   ├── requirements.txt
+    │   ├── .env.example
+    │   └── README.md
+    ├── entity_extractor/
+    │   ├── main.py
+    │   ├── extractor_crew.py
+    │   ├── models.py
+    │   ├── llm.py
+    │   ├── config/
+    │   ├── requirements.txt
+    │   ├── .env.example
+    │   └── README.md
+    └── currency_converter/
+        ├── main.py
+        ├── currency_crew.py
+        ├── models.py
+        ├── tools/
+        │   └── currency_converter.py
         ├── llm.py
         ├── config/
-        │   ├── agents.yaml
-        │   └── tasks.yaml
         ├── requirements.txt
         ├── .env.example
         └── README.md

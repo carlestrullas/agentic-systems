@@ -1,0 +1,25 @@
+# {query} is filled in from crew.kickoff(inputs={"query": ...}).
+# The output schema of parse_query_task (ConversionRequest) is attached in
+# currency_crew.py.
+
+parse_query_task:
+  agent: query_analyst
+  description: >
+    Analyse the user's question and extract the amount to convert, the source
+    currency and the target currency as ISO 4217 codes.
+
+    User question: "{query}"
+  expected_output: >
+    A conversion request with amount, from_currency and to_currency.
+
+conversion_task:
+  agent: currency_analyst
+  context: [parse_query_task]
+  description: >
+    Take the conversion request produced by the query analyst and convert the
+    amount with the currency converter tool, using live exchange rates. Then
+    answer the user's original question: "{query}".
+  expected_output: >
+    A short answer in Markdown with the converted amount in bold, the exchange
+    rate used, and one or two sentences of relevant context about the two
+    currencies. If the tool returns an error, explain it instead of guessing.

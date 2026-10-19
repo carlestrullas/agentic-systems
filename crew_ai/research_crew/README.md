@@ -22,9 +22,54 @@ Why several agents instead of one? Each agent has a **narrow focus** and only th
 
 ### Prompts in YAML
 
-Roles, goals, backstories and task descriptions live in [`config/agents.yaml`](config/agents.yaml) and [`config/tasks.yaml`](config/tasks.yaml). `crew.py` only wires them together, so you can tune the behaviour of the crew without touching the code and track prompt changes in git separately from logic changes.
+Roles, goals, backstories and task descriptions live in [`config/agents.yaml`](config/agents.yaml) and [`config/tasks.yaml`](config/tasks.yaml), so you can tune the behaviour of the crew without touching the code and track prompt changes in git separately from logic changes.
 
 Placeholders such as `{topic}` and `{today}` in the YAML are filled in by CrewAI from `crew.kickoff(inputs={...})`.
+
+### A modular crew class
+
+The crew is defined as a class in [`research_crew.py`](research_crew.py) using CrewAI's `@CrewBase` decorator:
+
+```python
+@CrewBase
+class ResearchCrew:
+    agents_config = "config/agents.yaml"   # loaded automatically into a dict
+    tasks_config = "config/tasks.yaml"
+
+    def __init__(self, llm, use_search=True): ...
+
+    @agent
+    def researcher(self) -> Agent:
+        return Agent(config=self.agents_config["researcher"], tools=self.search_tools, llm=self.llm)
+
+    @task
+    def research_task(self) -> Task:
+        return Task(config=self.tasks_config["research_task"])
+
+    @crew
+    def crew(self) -> Crew:
+        return Crew(agents=self.agents, tasks=self.tasks, process=Process.sequential)
+```
+
+| Piece | What it does |
+|---|---|
+| `@CrewBase` | Marks the class as a crew and loads the YAML files, relative to the class file. |
+| `config=...` | Maps role, goal, backstory, description, etc. from YAML; anything passed explicitly (`llm`, `tools`, `output_file`) takes precedence. |
+| `@agent` / `@task` | Register each agent and task. `self.agents` and `self.tasks` are filled in automatically, in definition order. |
+| `agent:` / `context:` in `tasks.yaml` | Refer to method names; CrewBase resolves them to the actual objects. |
+
+Compared with building every `Agent` and `Task` by hand, the code no longer repeats `config["..."]["role"]`-style lookups, and the crew can be instantiated several times with different options:
+
+```python
+from llm import build_llm
+from research_crew import ResearchCrew
+
+local = ResearchCrew(llm=build_llm("ollama/llama3.1:8b"), use_search=False)
+hosted = ResearchCrew(llm=build_llm("gpt-4o-mini"))
+result = hosted.crew().kickoff(inputs={"topic": "Agentic RAG", "today": "October 19, 2026"})
+```
+
+[`main.py`](main.py) is just the command-line entry point that builds the LLM and runs the class.
 
 ## Setup
 
@@ -79,10 +124,13 @@ Get a free key at [serper.dev](https://serper.dev) and set `SERPER_API_KEY` in `
 ## Run
 
 ```bash
-python crew.py --topic "Small language models"
+python main.py --topic "Small language models"
 
 # use another model for a single run without editing .env
-python crew.py --topic "Agentic RAG" --model gpt-4o-mini
+python main.py --topic "Agentic RAG" --model gpt-4o-mini
+
+# run without web search
+python main.py --topic "Agentic RAG" --no-search
 ```
 
 The agents' reasoning and tool calls are printed to the console. The output of each step is saved in `output/` (git-ignored), so you can see how the text changes from raw notes to the verified report.

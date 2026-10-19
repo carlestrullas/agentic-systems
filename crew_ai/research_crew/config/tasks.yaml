@@ -1,5 +1,7 @@
 # Task definitions. Each task is assigned to an agent from agents.yaml.
 # {topic} and {today} are filled in from crew.kickoff(inputs={...}).
+# `agent` and `context` refer to the method names in research_crew.py;
+# CrewBase resolves them to the actual Agent and Task objects.
 
 research_task:
   agent: researcher
@@ -14,6 +16,7 @@ research_task:
 
 summary_task:
   agent: summarizer
+  context: [research_task]
   description: >
     Using only the research notes from the previous task, write a structured
     summary of {topic}. Group related points, drop duplicates and keep the
@@ -24,6 +27,7 @@ summary_task:
 
 fact_check_task:
   agent: fact_checker
+  context: [research_task, summary_task]
   description: >
     Fact-check the summary of {topic} from the previous task. Search the web to
     verify each key point, especially numbers, dates and names. Correct any

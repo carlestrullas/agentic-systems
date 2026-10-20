@@ -15,7 +15,7 @@ Short, focused scripts, one concept each, and a final example that puts a crew i
 | [`03_structured_state.py`](03_structured_state.py) | State as a Pydantic model with `Flow[TaskState]`, and the error you get when assigning an undeclared field. | No |
 | [`04_or_and.py`](04_or_and.py) | `or_()` (run when any trigger finishes) and `and_()` (run when all have finished). | No |
 | [`05_router.py`](05_router.py) | `@router()` to choose the next step at run time; the ticket priority can be decided by an LLM. | Optional |
-| [`poem_flow/`](poem_flow/) | A flow that orchestrates a `@CrewBase` crew: random length → crew writes the poem → save to file. | Yes |
+| [`poem_flow/`](poem_flow/) | A complete flow project with the `crewai create flow` structure (`pyproject.toml`, `src/`, `crews/`, `tools/`) that orchestrates a `@CrewBase` crew. It has its own setup: see its [README](poem_flow/README.md). | Yes |
 
 ## Setup
 
@@ -43,10 +43,11 @@ python 03_structured_state.py --undeclared-field
 python 04_or_and.py                     # or: --demo or | --demo and
 python 05_router.py                     # random priority, no LLM
 python 05_router.py --ticket "Our checkout page is down and customers cannot pay!"
-python -m poem_flow.main --topic "Monday mornings"
 ```
 
-`--plot` (in `01`, `05` and `poem_flow`) saves an interactive HTML diagram of the flow and opens it.
+`--plot` (in `01` and `05`) saves an interactive HTML diagram of the flow and opens it.
+
+`poem_flow` is an installable project with its own `.env`: follow its [README](poem_flow/README.md) and run it from its folder with `crewai run`.
 
 ## The building blocks
 
@@ -104,17 +105,25 @@ In `05_router.py` the router itself is deterministic, but the priority it reads 
 
 ### Crews inside flows
 
-[`poem_flow/`](poem_flow/) follows the layout that `crewai create flow` generates, adapted to this repo (any LLM, no hard-coded OpenAI):
+[`poem_flow/`](poem_flow/) has the same structure as a project generated with `crewai create flow`, adapted to this repo so it runs on any LLM instead of only OpenAI:
 
 ```
 poem_flow/
-├── main.py                      # PoemFlow + PoemState: the orchestration
-└── crews/
-    └── poem_crew/
-        ├── poem_crew.py         # PoemCrew, a @CrewBase class
-        └── config/
-            ├── agents.yaml
-            └── tasks.yaml
+├── pyproject.toml               # dependencies, entry points and [tool.crewai] type = "flow"
+├── .env.example
+├── README.md
+├── tests/
+└── src/poem_flow/
+    ├── main.py                  # PoemFlow + PoemState and the kickoff / plot entry points
+    ├── llm.py
+    ├── crews/
+    │   └── poem_crew/
+    │       ├── poem_crew.py     # PoemCrew, a @CrewBase class
+    │       └── config/
+    │           ├── agents.yaml
+    │           └── tasks.yaml
+    └── tools/
+        └── custom_tool.py       # place for the project's own tools
 ```
 
 ```python

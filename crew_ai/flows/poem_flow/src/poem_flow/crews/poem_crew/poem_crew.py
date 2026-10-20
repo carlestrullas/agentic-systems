@@ -27,6 +27,7 @@ class PoemCrew:
         return Agent(
             config=self.agents_config["poem_writer"],
             llm=self.llm,
+            # tools=[SentenceCounterTool()],  # from poem_flow.tools.custom_tool
             allow_delegation=False,
             verbose=self.verbose,
         )

@@ -83,9 +83,16 @@ agentic-systems/
         ├── 03_structured_state.py
         ├── 04_or_and.py
         ├── 05_router.py
-        ├── poem_flow/
-        │   ├── main.py
-        │   └── crews/poem_crew/
+        ├── poem_flow/                # crewai create flow structure
+        │   ├── pyproject.toml
+        │   ├── .env.example
+        │   ├── README.md
+        │   ├── tests/
+        │   └── src/poem_flow/
+        │       ├── main.py
+        │       ├── llm.py
+        │       ├── crews/poem_crew/
+        │       └── tools/custom_tool.py
         ├── llm.py
         ├── requirements.txt
         ├── .env.example

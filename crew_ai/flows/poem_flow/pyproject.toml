@@ -1,0 +1,23 @@
+[project]
+name = "poem_flow"
+version = "0.1.0"
+description = "A CrewAI flow that orchestrates a poem-writing crew, on Ollama or a hosted LLM"
+authors = [{ name = "Carles Trullàs" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]",
+    "python-dotenv",
+]
+
+[project.scripts]
+kickoff = "poem_flow.main:kickoff"
+run_crew = "poem_flow.main:kickoff"
+plot = "poem_flow.main:plot"
+run_with_trigger = "poem_flow.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "flow"

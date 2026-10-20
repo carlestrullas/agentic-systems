@@ -21,50 +21,12 @@ topic ──▶ Senior Research Analyst ──▶ web search (optional) ──�
 cd crew_ai/researcher_agent
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-
 cp .env.example .env
 ```
 
-Then choose the LLM (option A or B) and, optionally, add the search key.
+**Model:** set `MODEL` in `.env` to a local Ollama model (the default, `ollama/llama3.1:8b`) or to a hosted model with its API key. Both options are explained step by step in [Choosing the model](../README.md#choosing-the-model). The agent calls a search tool, so with Ollama use a 7–8B model or larger; 1–3B models often fail to call it.
 
-### Option A: local model with Ollama (no API key)
-
-1. Install Ollama from [ollama.com](https://ollama.com) (on Linux: `curl -fsSL https://ollama.com/install.sh | sh`).
-2. Download a model and make sure the server is running:
-
-   ```bash
-   ollama pull llama3.1:8b
-   ollama serve        # not needed if the Ollama desktop app is already open
-   ```
-
-3. In `.env`, keep:
-
-   ```env
-   MODEL=ollama/llama3.1:8b
-   OLLAMA_BASE_URL=http://localhost:11434
-   ```
-
-The agent calls a search tool, and very small models (1–3B) often fail to do that properly. Use `llama3.1:8b`, `qwen2.5:7b` or larger.
-
-### Option B: hosted model with an API key
-
-Comment out the Ollama `MODEL` line, uncomment the one for your provider and fill in its key:
-
-```env
-MODEL=gpt-4o-mini
-OPENAI_API_KEY=sk-...
-```
-
-| Provider | `MODEL` example | Key variable |
-|---|---|---|
-| OpenAI | `gpt-4o-mini` | `OPENAI_API_KEY` |
-| Anthropic | `anthropic/claude-sonnet-4-5` | `ANTHROPIC_API_KEY` |
-| Google Gemini | `gemini/gemini-2.0-flash` | `GEMINI_API_KEY` |
-| Groq | `groq/llama-3.3-70b-versatile` | `GROQ_API_KEY` |
-
-### Web search (optional, both options)
-
-Get a free key at [serper.dev](https://serper.dev) and set `SERPER_API_KEY` in `.env`. Without it the agent works from the model's own knowledge.
+**Web search (optional):** get a free key at [serper.dev](https://serper.dev) and set `SERPER_API_KEY`. Without it the agent works from the model's own knowledge.
 
 ## Run
 

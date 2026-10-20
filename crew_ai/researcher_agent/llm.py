@@ -8,12 +8,20 @@ The model is chosen with the MODEL variable (in .env or via --model):
 * ``anthropic/<model>``   -> Anthropic (needs ANTHROPIC_API_KEY)
 * ``gemini/<model>``      -> Google Gemini (needs GEMINI_API_KEY)
 * ``groq/<model>``        -> Groq (needs GROQ_API_KEY)
+
+`build_llm()` creates a new LLM (and checks Ollama or the API key first);
+`get_llm()` builds it once and reuses it, which is handy in flows where several
+steps need the model.
+
+This file is identical in every example of the repository: when you change it,
+copy it to all of them.
 """
 
 import json
 import os
 import urllib.error
 import urllib.request
+from functools import lru_cache
 
 from crewai import LLM
 
@@ -82,3 +90,9 @@ def build_llm(model: str | None = None, temperature: float = 0.3) -> LLM:
 
     print(f"☁️  Using hosted model {model}\n")
     return LLM(model=model, temperature=temperature)
+
+
+@lru_cache(maxsize=None)
+def get_llm() -> LLM:
+    """Build the LLM once (from MODEL in the environment) and reuse it afterwards."""
+    return build_llm()

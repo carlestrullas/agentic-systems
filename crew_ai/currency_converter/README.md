@@ -72,14 +72,9 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-**Model.** Choose it in `.env`, exactly as in the other examples:
+**Model:** set `MODEL` in `.env` to a local Ollama model (the default, `ollama/llama3.1:8b`) or to a hosted model with its API key. Both options are explained step by step in [Choosing the model](../README.md#choosing-the-model). The second agent must call a tool with the right arguments, so with Ollama use a 7–8B model or larger; 1–3B models often skip the tool and invent a rate.
 
-- **Ollama (no API key):** `ollama pull llama3.1:8b` and keep `MODEL=ollama/llama3.1:8b`. The second agent must call a tool with the right arguments, so use a 7–8B model or larger; 1–3B models often skip the tool and invent a rate.
-- **API key:** set for example `MODEL=gpt-4o-mini` and `OPENAI_API_KEY=sk-...` (also `anthropic/…`, `gemini/…`, `groq/…` with their keys).
-
-See [`technical_writer_agent`](../technical_writer_agent/README.md#setup) for the step-by-step setup of both options.
-
-**Exchange rates.** Optional: get a free key at [exchangerate-api.com](https://www.exchangerate-api.com) and set `EXCHANGE_RATE_API_KEY`. Without it the tool uses the provider's open endpoint, which needs no key but is updated once a day and rate-limited.
+**Exchange rates (optional):** get a free key at [exchangerate-api.com](https://www.exchangerate-api.com) and set `EXCHANGE_RATE_API_KEY`. Without it the tool uses the provider's open endpoint, which needs no key but is updated once a day and rate-limited.
 
 ## Run
 

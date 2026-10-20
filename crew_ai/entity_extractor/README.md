@@ -61,12 +61,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Choose the model in `.env`, exactly as in the other examples:
-
-- **Ollama (no API key):** `ollama pull llama3.1:8b` and keep `MODEL=ollama/llama3.1:8b`. Small models (1–3B) often return fewer or malformed triplets; 7–8B models or larger work much better.
-- **API key:** set for example `MODEL=gpt-4o-mini` and `OPENAI_API_KEY=sk-...` (also `anthropic/…`, `gemini/…`, `groq/…` with their keys).
-
-See [`technical_writer_agent`](../technical_writer_agent/README.md#setup) for the step-by-step setup of both options.
+**Model:** set `MODEL` in `.env` to a local Ollama model (the default, `ollama/llama3.1:8b`) or to a hosted model with its API key. Both options are explained step by step in [Choosing the model](../README.md#choosing-the-model). Small Ollama models (1–3B) often return fewer or malformed triplets; 7–8B models or larger work much better.
 
 ## Run
 

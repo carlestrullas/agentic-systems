@@ -26,12 +26,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-The LLM is chosen with `MODEL` in `.env`, as in the rest of the repo:
-
-- **Ollama (no API key):** `ollama pull llama3.1:8b` and keep `MODEL=ollama/llama3.1:8b`. For these examples even a small model such as `llama3.2:3b` works, because no tool calling is involved.
-- **API key:** set for example `MODEL=gpt-4o-mini` and `OPENAI_API_KEY=sk-...` (also `anthropic/…`, `gemini/…`, `groq/…` with their keys).
-
-See [`technical_writer_agent`](../technical_writer_agent/README.md#setup) for the step-by-step setup of both options. Every script that uses an LLM also accepts `--model` to override it for one run.
+**Model:** set `MODEL` in `.env` to a local Ollama model (the default, `ollama/llama3.1:8b`) or to a hosted model with its API key. Both options are explained step by step in [Choosing the model](../README.md#choosing-the-model). No step calls tools, so even a small Ollama model such as `llama3.2:3b` works.
 
 ## Run
 

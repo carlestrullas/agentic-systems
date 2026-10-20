@@ -61,10 +61,7 @@ All commands run from this folder (`crew_ai/flows/poem_flow`).
 cp .env.example .env
 ```
 
-Choose the model in `.env`:
-
-- **Ollama (no API key):** install [Ollama](https://ollama.com), run `ollama pull llama3.1:8b` and keep `MODEL=ollama/llama3.1:8b`. A small model such as `llama3.2:3b` also works here, because the crew uses no tools.
-- **API key:** set for example `MODEL=gpt-4o-mini` and `OPENAI_API_KEY=sk-...` (also `anthropic/…`, `gemini/…`, `groq/…` with their keys).
+**Model:** set `MODEL` in `.env` to a local Ollama model (the default, `ollama/llama3.1:8b`) or to a hosted model with its API key. Both options are explained step by step in [Choosing the model](../../README.md#choosing-the-model). The crew uses no tools, so even a small Ollama model such as `llama3.2:3b` works.
 
 Then install the project, with either of these options.
 

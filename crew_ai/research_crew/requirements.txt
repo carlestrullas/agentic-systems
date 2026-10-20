@@ -1,4 +1,3 @@
 crewai
 crewai-tools
 python-dotenv
-pyyaml

@@ -13,6 +13,7 @@ The repository is organised **by framework**. Each folder contains self-containe
 | [CrewAI](crew_ai/) | [`research_crew`](crew_ai/research_crew/) | A three-agent crew (researcher, summarizer, fact-checker) built as a modular class with YAML config. Works with Ollama or an API key. |
 | [CrewAI](crew_ai/) | [`entity_extractor`](crew_ai/entity_extractor/) | Extracts subject-relation-object triplets from text as a validated Pydantic object (structured output). Works with Ollama or an API key. |
 | [CrewAI](crew_ai/) | [`currency_converter`](crew_ai/currency_converter/) | Answers money questions with a custom live exchange-rate tool and a query-parsing agent. Works with Ollama or an API key. |
+| [CrewAI](crew_ai/) | [`flows`](crew_ai/flows/) | Event-driven workflows with CrewAI Flows: chained steps, shared state, conditional logic, routing and crews inside flows. Works with Ollama or an API key. |
 
 More frameworks (such as LangGraph, the OpenAI Agents SDK, the Claude Agent SDK or agents built from scratch) and more complex examples will be added over time.
 
@@ -65,14 +66,27 @@ agentic-systems/
     │   ├── requirements.txt
     │   ├── .env.example
     │   └── README.md
-    └── currency_converter/
-        ├── main.py
-        ├── currency_crew.py
-        ├── models.py
-        ├── tools/
-        │   └── currency_converter.py
+    ├── currency_converter/
+    │   ├── main.py
+    │   ├── currency_crew.py
+    │   ├── models.py
+    │   ├── tools/
+    │   │   └── currency_converter.py
+    │   ├── llm.py
+    │   ├── config/
+    │   ├── requirements.txt
+    │   ├── .env.example
+    │   └── README.md
+    └── flows/
+        ├── 01_basic_flow.py
+        ├── 02_unstructured_state.py
+        ├── 03_structured_state.py
+        ├── 04_or_and.py
+        ├── 05_router.py
+        ├── poem_flow/
+        │   ├── main.py
+        │   └── crews/poem_crew/
         ├── llm.py
-        ├── config/
         ├── requirements.txt
         ├── .env.example
         └── README.md

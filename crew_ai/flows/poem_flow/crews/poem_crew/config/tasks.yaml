@@ -1,0 +1,11 @@
+# {topic} and {sentence_count} come from the flow state, passed to
+# crew.kickoff(inputs={...}) in poem_flow/main.py.
+
+write_poem:
+  agent: poem_writer
+  description: >
+    Write a poem about {topic}. The poem must have exactly {sentence_count}
+    sentence(s). Make it uplifting, a little funny and easy to read aloud.
+  expected_output: >
+    Only the poem, with exactly {sentence_count} sentence(s) and no title or
+    extra commentary.

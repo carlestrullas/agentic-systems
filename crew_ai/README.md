@@ -11,6 +11,7 @@
 | [`research_crew`](research_crew/) | 3 | A multi-agent pipeline (research → summary → fact-check) defined as a modular `@CrewBase` class with YAML config; runs on Ollama or a hosted API. |
 | [`entity_extractor`](entity_extractor/) | 1 | Structured output: the task returns a validated Pydantic object (`output_pydantic`) with subject-relation-object triplets. |
 | [`currency_converter`](currency_converter/) | 2 | A custom tool (`BaseTool` subclass) for live exchange rates, plus a parser agent that turns a free-text question into the tool's Pydantic input. |
+| [`flows`](flows/) | – | Event-driven workflows with Flows: `@start`/`@listen`, unstructured and structured state, `or_`/`and_`, `@router`, and a crew running inside a flow. |
 
 ## Choosing the model: Ollama or API key
 
@@ -37,3 +38,4 @@ Every script also accepts `--model` to override it for one run. Each example's R
 | **CrewBase** | `@CrewBase` class with `@agent`, `@task` and `@crew` methods that load their settings from YAML. |
 | **Structured output** | `Task(..., output_pydantic=Model)`: the result is a validated Pydantic object (`result.pydantic`). |
 | **Custom tool** | A `BaseTool` subclass with `name`, `description`, `args_schema` (Pydantic) and a `_run` method. |
+| **Flow** | A `Flow` class whose methods are steps connected with `@start`, `@listen`, `@router`, `or_` and `and_`, sharing `self.state`. |

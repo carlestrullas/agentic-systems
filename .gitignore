@@ -9,6 +9,7 @@ venv/
 
 # Generated outputs
 output/
+crew_ai/flows/*.html
 
 # OS / editors
 .DS_Store

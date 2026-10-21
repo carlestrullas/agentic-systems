@@ -1,0 +1,52 @@
+# {draft_path}, {path_to_example_threads} and {path_to_example_linkedin} are
+# filled in from crew.kickoff(inputs={...}) in main.py. The output schemas
+# (Thread, LinkedInPost) are attached in planning_crew.py.
+
+analyze_draft:
+  agent: draft_analyzer
+  description: >
+    Use the file reading tool to read the Markdown file at {draft_path} and
+    write a technical overview of it for developers:
+
+    1. The core idea of the post.
+    2. Its main sections and what each one explains.
+    3. For every section, the URLs of the images it contains (written in
+       Markdown as ![alt](image_url)), so they can be attached to the social
+       media content later.
+  expected_output: >
+    A technical analysis with: the post title and core idea, the key sections
+    with their main points, important code or technical concepts, the key
+    takeaways for developers, and the image URLs grouped by section.
+
+create_twitter_thread_plan:
+  agent: twitter_thread_planner
+  context: [analyze_draft]
+  description: >
+    Use the file reading tool to read the example threads at
+    {path_to_example_threads} and study their writing style. Then, using the
+    draft analysis, plan a Twitter/X thread about the post in that same style:
+
+    - The first tweet is the hook: short (under 10 words), based on the post title.
+    - Go from the problem to the solution and from basic to advanced ideas.
+    - Each tweet covers one idea and has at most 280 characters.
+    - Attach to each tweet the image URLs from the analysis that illustrate it.
+    - End with the key takeaway and a call to action.
+  expected_output: >
+    A Twitter thread: its topic and the ordered list of tweets, each with its
+    content, its media URLs and whether it is the hook.
+
+create_linkedin_post_plan:
+  agent: linkedin_post_planner
+  context: [analyze_draft]
+  description: >
+    Use the file reading tool to read the example LinkedIn posts at
+    {path_to_example_linkedin} and study their writing style. Then, using the
+    draft analysis, write a LinkedIn post about the post in that same style:
+
+    - Open with an attention-grabbing line based on the post title.
+    - Explain the problem, the solution and why it matters in practice.
+    - Use short paragraphs and line breaks so it is easy to scan.
+    - End with a call to action, the blog link and 3-5 relevant hashtags.
+    - Choose the one image from the analysis that best represents the post.
+  expected_output: >
+    A LinkedIn post: its full content and the URL of the image to attach.

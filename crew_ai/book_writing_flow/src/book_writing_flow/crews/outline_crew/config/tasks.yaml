@@ -1,0 +1,23 @@
+# {topic} and {max_chapters} are filled in from crew.kickoff(inputs={...}).
+# The output schema of write_outline (Outline) is attached in outline_crew.py.
+
+research_task:
+  agent: researcher
+  description: >
+    Research {topic} and gather the latest information about it: the key
+    concepts, recent developments, main debates and practical applications.
+    These insights will be used to design the outline of a book.
+  expected_output: >
+    A list of insights and key points about {topic}, grouped by theme.
+
+write_outline:
+  agent: outline_writer
+  context: [research_task]
+  description: >
+    Using the research insights, design the outline of a book about {topic}.
+    Decide how many chapters it needs (between 3 and {max_chapters}) and give
+    each chapter a clear, specific title. Order the chapters so that the book
+    goes from the fundamentals to the most advanced or forward-looking topics,
+    without overlaps between chapters.
+  expected_output: >
+    The total number of chapters and the list of chapter titles, in order.

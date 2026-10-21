@@ -1,0 +1,29 @@
+# {title}, {topic} and {chapters} are filled in from crew.kickoff(inputs={...}).
+# {chapters} is the full outline, so each writer knows what the other chapters
+# cover. The output schema of write_chapter (Chapter) is attached in
+# chapter_writer_crew.py.
+
+research_chapter:
+  agent: chapter_researcher
+  description: >
+    Research the chapter "{title}" of a book about {topic}. Gather the latest
+    information, key ideas, examples and figures that this chapter should
+    include.
+  expected_output: >
+    A list of insights and key points for the chapter "{title}".
+
+write_chapter:
+  agent: chapter_writer
+  context: [research_chapter]
+  description: >
+    Using the research insights, write the chapter "{title}" of a book about
+    {topic}. The complete outline of the book is:
+
+    {chapters}
+
+    Cover only what belongs to this chapter and do not repeat the content of
+    the others. Write around 800 words in Markdown, with a short introduction,
+    a few sections with ### headings and a closing paragraph.
+  expected_output: >
+    The chapter title and its full content in Markdown (without repeating the
+    title at the top).

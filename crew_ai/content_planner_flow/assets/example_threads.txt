@@ -1,0 +1,69 @@
+# Examples of the author's Twitter/X threads.
+# The thread planner reads this file to copy the writing style.
+# Replace them with your own threads to make the output sound like you.
+
+# Thread 1
+
+## Tweet 1
+Train/test split, explained in 2 minutes:
+
+## Tweet 2
+Every model needs to be judged on data it has never seen.
+
+That's the whole point of a test set.
+
+But how you split matters more than most people think 👇
+
+## Tweet 3
+A random split works when every row is independent.
+
+- shuffle the rows
+- keep ~80% for training
+- keep ~20% for testing
+
+Simple. And often wrong.
+
+## Tweet 4
+If your data has time in it, a random split lets the model peek into the future.
+
+Fix: train on the past, test on the most recent period.
+
+## Tweet 5
+If several rows belong to the same user, patient or product, they must stay together.
+
+Otherwise the model memorises the entity instead of learning the pattern.
+
+Fix: group-based splits.
+
+## Tweet 6
+TL;DR
+- independent rows → random split
+- time series → split by time
+- grouped data → split by group
+
+Get the split right and your metrics finally mean something.
+
+# Thread 2
+
+## Tweet 1
+Precision vs. recall, without the jargon:
+
+## Tweet 2
+Precision: of everything the model flagged, how much was right?
+
+Recall: of everything that should have been flagged, how much did the model catch?
+
+## Tweet 3
+Spam filter → you care about precision.
+A real email in the spam folder is worse than one spam email in your inbox.
+
+## Tweet 4
+Fraud detection → you care about recall.
+Missing a fraudulent payment costs much more than reviewing a false alarm.
+
+## Tweet 5
+There's no "best" metric.
+
+There's only the metric that matches the cost of being wrong.
+
+Pick it before you train, not after.

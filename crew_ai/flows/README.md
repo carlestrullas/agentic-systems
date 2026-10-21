@@ -17,6 +17,8 @@ Short, focused scripts, one concept each, and a final example that puts a crew i
 | [`05_router.py`](05_router.py) | `@router()` to choose the next step at run time; the ticket priority can be decided by an LLM. | Optional |
 | [`poem_flow/`](poem_flow/) | A complete flow project with the `crewai create flow` structure (`pyproject.toml`, `src/`, `crews/`, `tools/`) that orchestrates a `@CrewBase` crew. It has its own setup: see its [README](poem_flow/README.md). | Yes |
 
+Once these concepts are clear, [`content_planner_flow`](../content_planner_flow/) and [`book_writing_flow`](../book_writing_flow/) apply them to complete applications with several crews.
+
 ## Setup
 
 ```bash

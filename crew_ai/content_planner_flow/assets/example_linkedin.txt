@@ -1,0 +1,53 @@
+# Examples of the author's LinkedIn posts.
+# The LinkedIn planner reads this file to copy the writing style.
+# Replace them with your own posts to make the output sound like you.
+
+# LinkedIn post 1
+
+Your model's 95% accuracy might be meaningless.
+
+Here's why.
+
+Imagine a dataset where only 5% of the transactions are fraudulent.
+
+A model that always predicts "not fraud" scores 95% accuracy.
+
+It also catches exactly zero fraud.
+
+This is the accuracy trap, and it shows up everywhere data is imbalanced: fraud, churn, medical diagnosis, defects in manufacturing.
+
+What to look at instead:
+↳ Precision: how many of the flagged cases are real
+↳ Recall: how many of the real cases you flagged
+↳ PR-AUC: how the trade-off behaves across thresholds
+
+And one more thing: choose the decision threshold based on business cost, not on the default 0.5.
+
+A metric is only useful if it reflects the cost of being wrong.
+
+What metric do you report to stakeholders for imbalanced problems?
+
+#MachineLearning #DataScience #ModelEvaluation
+
+# LinkedIn post 2
+
+Most data science projects don't fail because of the model.
+
+They fail before the first line of modelling code.
+
+After several projects in production, the pattern is always the same:
+
+1. The problem is defined in technical terms, not business terms.
+2. Nobody agrees on how success will be measured.
+3. The data available at prediction time is not the data used in training.
+
+None of these are solved with a better algorithm.
+
+They're solved with a 30-minute conversation at the start:
+→ What decision will this model support?
+→ What does a wrong prediction cost?
+→ What data will we really have when we need the prediction?
+
+Ask these three questions before you open a notebook.
+
+#DataScience #MLOps #AI

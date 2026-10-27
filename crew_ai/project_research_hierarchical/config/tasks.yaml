@@ -1,0 +1,49 @@
+# Task definitions. {project} and {today} are filled in from crew.kickoff(inputs={...}).
+#
+# There is no `agent:` field: in a hierarchical crew the manager receives every
+# task and decides which specialist should do it (delegation), so the routing
+# is part of the manager's job instead of being fixed here.
+
+market_demand_task:
+  description: >
+    Analyze the market demand for the project "{project}". Today's date is
+    {today}. Cover the target customers and their problem, the market size and
+    growth, the main competitors and alternatives, and the signals that show
+    demand (or its absence).
+  expected_output: >
+    A Markdown section titled "## Market demand" with the subsections Target
+    customers, Market size and growth, Competition and Demand signals, ending
+    with a one-line verdict on demand (strong / moderate / weak) and why.
+
+risk_analysis_task:
+  description: >
+    Analyze the risks of the project "{project}". Today's date is {today}.
+    Consider technical, market, financial, operational and regulatory risks.
+  expected_output: >
+    A Markdown section titled "## Risk analysis" with a table of the 5–8 most
+    important risks (columns: risk, category, likelihood, impact, mitigation),
+    followed by the two risks that matter most and why.
+
+roi_task:
+  description: >
+    Estimate the return on investment of the project "{project}". Today's date
+    is {today}. State the main cost items, the revenue model, and a
+    conservative and an optimistic scenario for the first three years.
+  expected_output: >
+    A Markdown section titled "## Return on investment" with the assumptions,
+    a table comparing the two scenarios (investment, yearly revenue, payback
+    period, 3-year ROI) and a short interpretation. Estimates are given as
+    ranges and labelled as estimates.
+
+final_report_task:
+  context: [market_demand_task, risk_analysis_task, roi_task]
+  description: >
+    Review the market demand, risk and ROI analyses of the project "{project}"
+    and write the final research report. Check that the three analyses are
+    consistent with each other (for example, that the ROI assumptions match the
+    market size) and point out any contradiction you find.
+  expected_output: >
+    A Markdown report starting with "# Project research: {project}", then an
+    "## Executive summary" with a clear go / no-go / go-with-conditions
+    recommendation, the three analysis sections (lightly edited for
+    consistency), and a "## Next steps" section with 3–5 concrete actions.

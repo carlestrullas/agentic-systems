@@ -1,0 +1,15 @@
+# {product} is filled in from crew.kickoff(inputs={...}).
+# The image itself is not a text placeholder: it is attached to the model's
+# messages through crew.kickoff(input_files={...}) in main.py.
+# The output schema (QualityReport) is attached in quality_crew.py.
+
+inspection_task:
+  agent: inspector
+  description: >
+    Inspect the attached image of a {product}. Look for visible defects such as
+    scratches, dents, cracks, stains, misalignment, colour inconsistencies,
+    damaged packaging or missing parts. For each defect, say what it is, where
+    it is and how severe it is. Then give an overall quality score, a verdict
+    and up to three recommendations.
+  expected_output: >
+    A quality report about the image, following the provided schema.

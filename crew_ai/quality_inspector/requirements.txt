@@ -1,0 +1,2 @@
+crewai[file-processing]
+python-dotenv

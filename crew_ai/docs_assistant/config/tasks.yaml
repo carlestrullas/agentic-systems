@@ -1,0 +1,14 @@
+# {question} and {documents} are filled in from crew.kickoff(inputs={...}).
+# The output schema (Answer) and the guardrail are attached in docs_crew.py.
+
+answer_task:
+  agent: assistant
+  description: >
+    Answer this question from an employee: {question}
+
+    The available documents are: {documents}. Use only the information
+    retrieved from them. If they do not contain the answer, set
+    found_in_documents to false and explain what is missing.
+  expected_output: >
+    A clear and concise answer, with the documents it is based on, following
+    the provided schema.

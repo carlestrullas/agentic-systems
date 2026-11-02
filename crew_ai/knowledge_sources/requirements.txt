@@ -1,0 +1,3 @@
+crewai
+python-dotenv
+ollama        # client used by CrewAI for local Ollama embeddings

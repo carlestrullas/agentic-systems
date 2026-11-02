@@ -1,0 +1,34 @@
+{
+  "company_name": "Lumen Analytics",
+  "founded": 2019,
+  "headquarters": "Barcelona",
+  "employee_count": 84,
+  "departments": [
+    {
+      "name": "Product",
+      "head": "Marta Soler",
+      "teams": [
+        {"name": "Design", "members": 6},
+        {"name": "Product Analytics", "members": 4}
+      ]
+    },
+    {
+      "name": "Engineering",
+      "head": "Jordi Puig",
+      "teams": [
+        {"name": "Platform", "members": 9},
+        {"name": "Data Engineering", "members": 7},
+        {"name": "Machine Learning", "members": 5},
+        {"name": "Mobile", "members": 4}
+      ]
+    },
+    {
+      "name": "Customer Success",
+      "head": "Laura Vidal",
+      "teams": [
+        {"name": "Support", "members": 8},
+        {"name": "Onboarding", "members": 3}
+      ]
+    }
+  ]
+}

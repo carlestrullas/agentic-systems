@@ -17,17 +17,17 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 python main.py                       # class-based crews
-python 01_basic_flow.py              # concept-script folders (flows, task_features, knowledge_sources)
+python 01_basic_flow.py              # concept-script folders (flows, task_features, knowledge_sources, memory)
 python main.py --model gpt-4o-mini   # every LLM script accepts --model to override MODEL from .env
 ```
 
 CrewAI CLI projects (`flows/poem_flow`, `content_planner_flow`, `book_writing_flow`) use `pyproject.toml` instead: install with `crewai install` (or `pip install -e .`), run with `crewai run`, or with the `[project.scripts]` entry points `kickoff`, `plot` and `run_with_trigger '<json>'` (use `uv run kickoff ...` after `crewai install`).
 
-The default model is local Ollama (`MODEL=ollama/llama3.1:8b`). Knowledge examples also need `ollama pull nomic-embed-text` (selected with `EMBEDDER`). `quality_inspector` needs a vision model.
+The default model is local Ollama (`MODEL=ollama/llama3.1:8b`). Knowledge and memory examples also need `ollama pull nomic-embed-text` (selected with `EMBEDDER`). `quality_inspector` needs a vision model.
 
 ## Shared-file invariants (important)
 
-- **`llm.py` is byte-identical in every example** (14 copies, including `src/<pkg>/llm.py` in CLI projects). If you change one, copy it to all of them and confirm with `find . -name llm.py -exec md5 -r {} \;`. It exposes `build_llm(model, temperature)`, which validates Ollama reachability, pulled model and provider API keys and exits with an actionable `SystemExit`, and `get_llm()`, an `lru_cache`d version for flows.
+- **`llm.py` is byte-identical in every example** (15 copies, including `src/<pkg>/llm.py` in CLI projects). If you change one, copy it to all of them and confirm with `find . -name llm.py -exec md5 -r {} \;`. It exposes `build_llm(model, temperature)`, which validates Ollama reachability, pulled model and provider API keys and exits with an actionable `SystemExit`, and `get_llm()`, an `lru_cache`d version for flows.
 - **`knowledge_setup.py` is identical** in `knowledge_sources/` and `docs_assistant/`. It must be imported **before anything from `crewai`**, because it sets `CREWAI_STORAGE_DIR` (a per-example/script/embedder ChromaDB store) and CrewAI reads that only at import time.
 - `.env.example` lists every variable an example reads, with `REPLACE_ME` placeholders. `llm.py` treats `REPLACE_ME` as unset. Copy an existing `.env.example` as the base for new examples.
 

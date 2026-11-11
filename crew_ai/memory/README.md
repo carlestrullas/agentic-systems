@@ -8,6 +8,13 @@ Until now every crew was **stateless**: each `kickoff()` started from a blank sl
 | [Tools](../currency_converter/) | Data fetched on the fly (an API, a search). Not kept afterwards. | Every call. |
 | **Memory** | What the agents learn while working: user preferences, facts, outcomes. | After every task. |
 
+With memory an agent gains four things:
+
+- **Context retention**: it can refer back to earlier steps of a conversation or workflow without being told everything again.
+- **Personalisation**: it tailors answers to what each user has said about themselves (name, preferences, past requests).
+- **Learning from experience**: outcomes of earlier runs are kept, so it can avoid repeating mistakes or work already done.
+- **Collaboration**: in a crew, what one agent finds out is available to the others.
+
 ```
             ┌─ after each task ───────────────────────────────────────────────────┐
 task + ───▶ │ memory LLM ──▶ short facts + scope, categories, importance ──▶ embed │──▶ storage (LanceDB)
@@ -29,6 +36,7 @@ Short, focused scripts, one concept each:
 | [`04_recall_tuning.py`](04_recall_tuning.py) | How recall ranks facts: similarity, recency and importance weights; shallow vs. deep recall; filtering by scope or category. | `remember(scope=, categories=, importance=)`, `*_weight`, `depth` |
 | [`05_user_memory.py`](05_user_memory.py) | One assistant, two users: each crew sees only its user's branch of the memory. | `memory.scope("/users/<id>")` |
 | [`06_reset_memory.py`](06_reset_memory.py) | Delete one person's facts, then wipe the whole memory. | `forget()`, `reset()`, `crew.reset_memories()` |
+| [`07_shared_crew_memory.py`](07_shared_crew_memory.py) | A support agent handles a call; a second agent, given no task context, writes the follow-up email from memory alone. | `root_scope`, `Task(context=[])` |
 
 ## Setup
 
@@ -62,9 +70,11 @@ python 05_user_memory.py
 python 05_user_memory.py --user carles --message "I'm vegetarian and I live in Manresa."
 python 05_user_memory.py --user carles --message "Suggest a restaurant for tonight."
 python 06_reset_memory.py
+python 07_shared_crew_memory.py
+python 07_shared_crew_memory.py --no-memory          # the writer gets no facts at all
 ```
 
-Every script accepts `--model` to use another LLM for one run. 01, 03, 04, 05 (demo mode) and 06 empty their memory at the start, so each run is repeatable. 02 and `05 --user` keep it, because remembering between runs is what they show; delete their folders under `output/memory/` (or run `02 --reset`) to start again.
+Every script accepts `--model` to use another LLM for one run. 01, 03, 04, 05 (demo mode), 06 and 07 empty their memory at the start, so each run is repeatable. 02 and `05 --user` keep it, because remembering between runs is what they show; delete their folders under `output/memory/` (or run `02 --reset`) to start again.
 
 ## The building blocks
 
@@ -128,7 +138,7 @@ score = semantic_weight × similarity + recency_weight × 0.5^(age_days / recenc
 
 ### Scopes: per user, per agent, per crew
 
-`memory.scope(path)` is a view of one branch: everything saved through it goes under `path`, and recall only searches there. Pass it as `Crew(memory=...)` or `Agent(memory=...)`. `memory.slice([path1, path2])` is a read-only view over several branches, for example a support agent that may read the product notes and the current user's notes but write neither. With `Crew(memory=True)`, CrewAI scopes everything under `/crew/<crew name>` and each agent's saves under `.../agent/<role>`.
+`memory.scope(path)` is a view of one branch: everything saved through it goes under `path`, and recall only searches there. Pass it as `Crew(memory=...)` or `Agent(memory=...)`. `memory.slice([path1, path2])` is a read-only view over several branches, for example a support agent that may read the product notes and the current user's notes but write neither. With `Crew(memory=True)`, CrewAI scopes everything under `/crew/<crew name>` and each agent's saves under `.../agent/<role>`, while recall searches the whole crew branch, so agents share what they learn (`07` sets the same `root_scope` on its own `Memory`).
 
 Scopes match by **prefix**, without stopping at the `/`: `memory.scope("/users/al")` also sees `/users/alice`. Use IDs that are never the start of another ID (UUIDs, fixed-length numbers).
 

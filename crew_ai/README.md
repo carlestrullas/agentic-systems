@@ -21,7 +21,7 @@ The examples are ordered so that each one builds on the previous ones. Each row 
 | 11 | [`quality_inspector`](quality_inspector/) | 1 | Multimodal agents: an image attached with `input_files` to a vision model, returned as a structured quality report. |
 | 12 | [`knowledge_sources`](knowledge_sources/) | – | Knowledge (built-in RAG): string, text, PDF, CSV and JSON sources; agent vs. crew knowledge; choosing the embedder; retrieval tuning; a custom source from an API. |
 | 13 | [`docs_assistant`](docs_assistant/) | 1 | A complete Q&A assistant over a folder of documents: a custom folder source that labels every chunk with its file, cited sources in a structured answer and a guardrail. |
-| 14 | [`memory`](memory/) | – | Memory: facts saved after each task and recalled before the next, across sessions; scopes per entity and per user; how recall ranks (similarity, recency, importance); forgetting and resetting. |
+| 14 | [`memory`](memory/) | – | Memory: facts saved after each task and recalled before the next, across sessions; scopes per entity and per user; how recall ranks (similarity, recency, importance); forgetting and resetting; agents sharing what they learn. |
 
 ## Choosing the model
 

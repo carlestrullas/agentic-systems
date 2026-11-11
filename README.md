@@ -8,7 +8,7 @@ The repository is organised **by framework**. Each framework folder has its own 
 
 | Framework | Examples | What they cover |
 |---|---|---|
-| [CrewAI](crew_ai/) | 13 | Agents, tasks and crews; multi-agent pipelines; YAML config and modular crew classes; structured output with Pydantic; custom tools; Flows and multi-crew flows running crews in parallel; guardrails, async tasks, callbacks and human review; hierarchical crews with a manager agent; multimodal agents; knowledge (built-in RAG) over files, strings and APIs. |
+| [CrewAI](crew_ai/) | 14 | Agents, tasks and crews; multi-agent pipelines; YAML config and modular crew classes; structured output with Pydantic; custom tools; Flows and multi-crew flows running crews in parallel; guardrails, async tasks, callbacks and human review; hierarchical crews with a manager agent; multimodal agents; knowledge (built-in RAG) over files, strings and APIs; memory across tasks, sessions and users. |
 
 More frameworks (such as LangGraph, the OpenAI Agents SDK, the Claude Agent SDK or agents built from scratch) will be added over time.
 
